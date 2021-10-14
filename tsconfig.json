@@ -15,8 +15,8 @@
         "jsx": "preserve",
         "baseUrl": ".",
         "paths": {
-            "@components/*": ["src/components/*"],
-            "@components": ["src/components"],
+            "@components/*": ["src/modules/core/components/*"],
+            "@components": ["src/modules/core/components"],
             "@public/*": ["public/*"],
             "@public": ["public"],
             "@definitions/*": ["src/definitions/*"],
@@ -25,12 +25,16 @@
             "@interfaces": ["src/interfaces"],
             "@styles/*": ["src/styles/*"],
             "@styles": ["src/styles"],
-            "@components/icons/*": ["src/components/icons/*"],
-            "@components/icons": ["src/components/icons"],
+            "@components/icons/*": ["src/modules/core/components/icons/*"],
+            "@components/icons": ["src/modules/core/components/icons"],
             "@redux/*": ["src/redux/*"],
             "@redux": ["src/redux"],
             "@test/*": ["test/*"],
-            "@test": ["test"]
+            "@test": ["test"],
+            "@core/*": ["src/modules/core/*"],
+            "@core": ["src/modules/core"],
+            "@user/*": ["src/modules/user/*"],
+            "@user": ["src/modules/user"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

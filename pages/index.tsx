@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { Header, Main, Cards, Footer } from "@components";
+import { Header, Main, Cards, Footer } from 'src/modules/core/components';
 
 const Home: React.FC = () => {
     return (
         <div
             style={{
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "100vh",
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh',
             }}
         >
             <Header />
