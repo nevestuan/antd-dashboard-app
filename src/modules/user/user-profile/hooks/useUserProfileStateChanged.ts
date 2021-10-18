@@ -19,7 +19,9 @@ const useUserProfileStateChanged = (): void => {
                 });
             } else {
                 removeCurrentUser();
-                router.push('/login');
+                if (!router.pathname.includes('/login')) {
+                    router.push('/login');
+                }
             }
         });
     }, []);
