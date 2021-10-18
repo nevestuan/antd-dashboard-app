@@ -34,7 +34,9 @@
             "@core/*": ["src/modules/core/*"],
             "@core": ["src/modules/core"],
             "@user/*": ["src/modules/user/*"],
-            "@user": ["src/modules/user"]
+            "@user": ["src/modules/user"],
+            "@layouts/*": ["src/modules/layouts/*"],
+            "@layouts": ["src/modules/layouts"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

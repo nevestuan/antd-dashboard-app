@@ -10,19 +10,7 @@ import {
 import { createAsyncThunk } from '@core/misc/utils';
 // import { USER_ACCESS_TOKEN_KEY } from '@core/misc/constants';
 import { IUserCredential } from '@user/misc/api';
-
-export interface IUserProfile {
-    displayName: string;
-    email: string;
-    accessToken: string;
-    refreshToken: string;
-}
-
-export interface IUserProfileState {
-    data?: IUserProfile;
-    loading: boolean;
-    error?: any;
-}
+import { IUserProfileState } from '@interfaces/user';
 
 const sliceName = 'USER_PROFILE';
 

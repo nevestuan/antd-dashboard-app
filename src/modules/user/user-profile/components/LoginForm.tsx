@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
-
-export interface ILoginFormValues {
-    username: string;
-    password: string;
-}
+import { ILoginFormValues } from '@interfaces/user';
 
 export interface ILoginFormProps {
     onSubmit: (values: ILoginFormValues) => void;

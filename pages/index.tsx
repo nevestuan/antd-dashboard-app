@@ -1,22 +1,9 @@
 import React from 'react';
 
-import { Header, Main, Cards, Footer } from 'src/modules/core/components';
+import { PageLayoutContainer } from '@layouts/page';
 
 const Home: React.FC = () => {
-    return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100vh',
-            }}
-        >
-            <Header />
-            <Main />
-            <Cards />
-            <Footer />
-        </div>
-    );
+    return <PageLayoutContainer>Index Page</PageLayoutContainer>;
 };
 
 export default Home;

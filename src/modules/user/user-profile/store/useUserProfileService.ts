@@ -1,14 +1,19 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+
+import { IUserProfile } from '@interfaces/user';
 
 import * as actions from './userProfileSlice';
 
 const selector = {
-    getCurrentUser: (state: Record<string, any>) => state.user.userProfile.data,
+    getCurrentUser: (state: Record<string, any>): IUserProfile =>
+        state.user.userProfile.data,
 };
 
 const useUserProfileService = (): Record<string, any> => {
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const updateCurrentUser = useCallback(
         (payload) => dispatch(actions.updateCurrentUser(payload)),
@@ -26,11 +31,17 @@ const useUserProfileService = (): Record<string, any> => {
     );
 
     const login = useCallback(
-        (payload) => dispatch(actions.login(payload)),
+        async (payload) => {
+            await dispatch(actions.login(payload));
+            router.push('/');
+        },
         [dispatch],
     );
 
-    const logout = useCallback(() => dispatch(actions.logout()), [dispatch]);
+    const logout = useCallback(async () => {
+        await dispatch(actions.logout());
+        router.push('/login');
+    }, [dispatch]);
 
     return {
         selector,
