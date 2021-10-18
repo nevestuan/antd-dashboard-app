@@ -54,14 +54,23 @@ const slice: Slice = createSlice({
     },
     extraReducers: {
         [signUp.fulfilled]: (state, { payload }) => {
-            console.log('signUp payload', payload);
             state.data = payload;
+        },
+
+        [login.pending]: (state, { payload }) => {
+            state.loading = true;
+            state.error = undefined;
         },
         [login.fulfilled]: (state, { payload }) => {
             state.data = payload._tokenResponse;
+            state.loading = false;
         },
+        [login.rejected]: (state, { payload }) => {
+            state.error = payload.code;
+            state.loading = false;
+        },
+
         [logout.fulfilled]: (state, { payload }) => {
-            console.log('logout payload', payload);
             state.data = undefined;
         },
     },

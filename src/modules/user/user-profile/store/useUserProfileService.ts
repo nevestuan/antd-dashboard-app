@@ -9,6 +9,10 @@ import * as actions from './userProfileSlice';
 const selector = {
     getCurrentUser: (state: Record<string, any>): IUserProfile =>
         state.user.userProfile.data,
+    getStatus: (state: any) => ({
+        loading: state.user.userProfile.loading,
+        error: state.user.userProfile.error,
+    }),
 };
 
 const useUserProfileService = (): Record<string, any> => {
@@ -32,15 +36,17 @@ const useUserProfileService = (): Record<string, any> => {
 
     const login = useCallback(
         async (payload) => {
-            await dispatch(actions.login(payload));
-            router.push('/');
+            const res = await dispatch(actions.login(payload));
+            if (!res?.error) {
+                router.push('/');
+            }
         },
         [dispatch],
     );
 
     const logout = useCallback(async () => {
         await dispatch(actions.logout());
-        router.push('/login');
+        // router.push('/login');
     }, [dispatch]);
 
     return {

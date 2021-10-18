@@ -47,9 +47,9 @@ export const createAsyncThunk = (
             const response = await requestFunc(payload, thunkAPI);
             return response;
         } catch (err: any) {
-            if (!err.response) {
+            if (!err) {
                 throw err;
             }
-            return rejectWithValue(err.response);
+            return rejectWithValue(err);
         }
     });

@@ -3,6 +3,13 @@
 
 This project was generated with [superplate](https://github.com/pankod/superplate).
 
+This project is live on: https://antd-dashboard-app.vercel.app/
+
+Outstanding Features:
+- Scalable project structure
+- Authentication via Firebase
+- Login page displays a random background photo via Unsplash
+
 ## Getting Started
 
 superplate is a Next.js all-in-one project generator. Create your project with the tools you need without spending hours on setting them up.

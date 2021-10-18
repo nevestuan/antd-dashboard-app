@@ -15,3 +15,9 @@ export interface ILoginFormValues {
     username: string;
     password: string;
 }
+
+export interface ILoginFormProps {
+    onSubmit: (values: ILoginFormValues) => void;
+    loading?: boolean;
+    error?: string;
+}

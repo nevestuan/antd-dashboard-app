@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Typography, Space } from 'antd';
 import styled from 'styled-components';
+import { useSelector, shallowEqual } from 'react-redux';
+
 import { ILoginFormValues } from '@interfaces/user';
 
 import { LoginForm } from '../components';
@@ -22,11 +24,14 @@ const StyledWrapper = styled(Card)`
 `;
 
 const LoginFormContainer: React.FC = () => {
-    const { login } = useUserProfileService();
+    const { login, selector } = useUserProfileService();
+    const { loading, error }: any = useSelector(
+        selector.getStatus,
+        shallowEqual,
+    );
 
     const handleLogin = async (values: ILoginFormValues) => {
-        console.log('values', values);
-        login(values);
+        return login(values);
     };
 
     return (
@@ -36,7 +41,11 @@ const LoginFormContainer: React.FC = () => {
                 New User? <Link>Create an account</Link>
             </Text>
             <div className="login-form">
-                <LoginForm onSubmit={handleLogin} />
+                <LoginForm
+                    onSubmit={handleLogin}
+                    loading={loading}
+                    error={error}
+                />
             </div>
         </StyledWrapper>
     );

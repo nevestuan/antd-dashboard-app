@@ -89,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     });
 
     // Pass data to the page via props
-    return { props: { backgroundUrl: photo.response?.urls?.full } };
+    return { props: { backgroundUrl: photo.response?.urls?.regular } };
 };
 
 export default LoginPage;

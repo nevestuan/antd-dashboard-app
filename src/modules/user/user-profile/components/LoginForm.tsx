@@ -1,7 +1,10 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Typography } from 'antd';
 import styled from 'styled-components';
-import { ILoginFormValues } from '@interfaces/user';
+import { ILoginFormProps } from '@interfaces/user';
+import { Map } from '@definitions/core';
+
+const { Text } = Typography;
 
 const StyledWrapper = styled.div`
     .actions {
@@ -12,11 +15,16 @@ const StyledWrapper = styled.div`
     }
 `;
 
-export interface ILoginFormProps {
-    onSubmit: (values: ILoginFormValues) => void;
-}
+const ERROR_MESSAGES: Map = {
+    'auth/user-not-found': 'Email not found',
+    'auth/wrong-password': 'Invalid password',
+};
 
-const LoginForm: React.FC<ILoginFormProps> = ({ onSubmit = () => {} }) => {
+const LoginForm: React.FC<ILoginFormProps> = ({
+    onSubmit = () => {},
+    loading = false,
+    error,
+}) => {
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
@@ -56,9 +64,19 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onSubmit = () => {} }) => {
                     <Input.Password />
                 </Form.Item>
 
+                {error && (
+                    <Text type="danger">
+                        {ERROR_MESSAGES[error] || 'Something went wrong!'}
+                    </Text>
+                )}
+
                 <Form.Item>
                     <div className="actions">
-                        <Button type="primary" htmlType="submit">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            loading={loading}
+                        >
                             Submit
                         </Button>
                     </div>
