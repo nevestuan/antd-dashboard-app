@@ -15,7 +15,7 @@ const PageHeaderContainer: React.FC = () => {
 
     return (
         <PageHeader onLogout={handleLogOut} currentUser={currentUser}>
-            AntD Dashboard
+            Ant Dashboard
         </PageHeader>
     );
 };

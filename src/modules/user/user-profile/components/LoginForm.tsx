@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Button } from 'antd';
+import styled from 'styled-components';
 import { ILoginFormValues } from '@interfaces/user';
+
+const StyledWrapper = styled.div`
+    .actions {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+`;
 
 export interface ILoginFormProps {
     onSubmit: (values: ILoginFormValues) => void;
@@ -12,42 +22,49 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onSubmit = () => {} }) => {
     };
 
     return (
-        <Form
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            initialValues={{ remember: true }}
-            onFinish={onSubmit}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-        >
-            <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                    { required: true, message: 'Please input your username!' },
-                    { type: 'email' },
-                ]}
+        <StyledWrapper>
+            <Form
+                layout="vertical"
+                name="basic"
+                onFinish={onSubmit}
+                onFinishFailed={onFinishFailed}
             >
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your username!',
+                        },
+                        { type: 'email' },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                    { required: true, message: 'Please input your password!' },
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
+                <Form.Item
+                    label="Password"
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item>
+                    <div className="actions">
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </div>
+                </Form.Item>
+            </Form>
+        </StyledWrapper>
     );
 };
 export default LoginForm;
