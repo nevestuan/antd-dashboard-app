@@ -10,7 +10,7 @@ const useUserProfileStateChanged = (): void => {
 
     useEffect(() => {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 updateCurrentUser({
                     displayName: user.displayName,
@@ -24,7 +24,11 @@ const useUserProfileStateChanged = (): void => {
                 }
             }
         });
-    }, []);
+
+        return () => {
+            unsubscribe();
+        };
+    }, [router.pathname]);
 };
 
 export default useUserProfileStateChanged;
