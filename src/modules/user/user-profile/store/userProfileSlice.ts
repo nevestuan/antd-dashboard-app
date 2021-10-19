@@ -53,8 +53,17 @@ const slice: Slice = createSlice({
         },
     },
     extraReducers: {
+        [signUp.pending]: (state, { payload }) => {
+            state.loading = true;
+            state.error = undefined;
+        },
         [signUp.fulfilled]: (state, { payload }) => {
             state.data = payload;
+            state.loading = false;
+        },
+        [signUp.rejected]: (state, { payload }) => {
+            state.error = payload.code;
+            state.loading = false;
         },
 
         [login.pending]: (state, { payload }) => {

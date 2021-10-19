@@ -12,11 +12,17 @@ export interface IUserProfileState {
 }
 
 export interface ILoginFormValues {
-    username: string;
+    email: string;
     password: string;
 }
 
 export interface ILoginFormProps {
+    onSubmit: (values: ILoginFormValues) => void;
+    loading?: boolean;
+    error?: string;
+}
+
+export interface ISignupFormProps {
     onSubmit: (values: ILoginFormValues) => void;
     loading?: boolean;
     error?: string;

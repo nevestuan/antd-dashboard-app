@@ -3,7 +3,7 @@ import { Form, Input, Button, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
-import { ILoginFormProps } from '@interfaces/user';
+import { ISignupFormProps, ILoginFormValues } from '@interfaces/user';
 import { Map } from '@definitions/core';
 
 const { Text } = Typography;
@@ -18,11 +18,10 @@ const StyledWrapper = styled.div`
 `;
 
 const ERROR_MESSAGES: Map = {
-    'auth/user-not-found': 'Email not found.',
-    'auth/wrong-password': 'Invalid password.',
+    'auth/email-already-in-use': 'This email already existed.',
 };
 
-const LoginForm: React.FC<ILoginFormProps> = ({
+const SignupForm: React.FC<ISignupFormProps> = ({
     onSubmit = () => {},
     loading = false,
     error,
@@ -31,12 +30,15 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         console.log('Failed:', errorInfo);
     };
 
+    const handleSubmit = (values: ILoginFormValues) =>
+        onSubmit({ email: values.email, password: values.password });
+
     return (
         <StyledWrapper>
             <Form
                 layout="vertical"
                 name="basic"
-                onFinish={onSubmit}
+                onFinish={handleSubmit}
                 onFinishFailed={onFinishFailed}
             >
                 <Form.Item
@@ -76,6 +78,41 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                     />
                 </Form.Item>
 
+                <Form.Item
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    dependencies={['password']}
+                    hasFeedback
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please confirm your password!',
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (
+                                    !value ||
+                                    getFieldValue('password') === value
+                                ) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(
+                                    new Error(
+                                        'The two passwords that you entered do not match!',
+                                    ),
+                                );
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password
+                        prefix={
+                            <LockOutlined className="site-form-item-icon" />
+                        }
+                        placeholder="Password"
+                    />
+                </Form.Item>
+
                 {error && (
                     <Text type="danger">
                         {ERROR_MESSAGES[error] || 'Something went wrong!'}
@@ -89,7 +126,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                             htmlType="submit"
                             loading={loading}
                         >
-                            Login
+                            Sign up
                         </Button>
                     </div>
                 </Form.Item>
@@ -97,4 +134,4 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         </StyledWrapper>
     );
 };
-export default LoginForm;
+export default SignupForm;
