@@ -125,30 +125,30 @@ const LoginPage: React.FC<ILoginPageProps> = ({ unsplashPhoto = {} }) => {
     );
 };
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//     // Fetch data from external API
-//     try {
-//         const photo: any = await unsplashApi.photos.getRandom({
-//             query: 'nature',
-//             orientation: 'landscape',
-//         });
+export const getServerSideProps: GetServerSideProps = async () => {
+    // Fetch data from external API
+    try {
+        const photo: any = await unsplashApi.photos.getRandom({
+            query: 'nature',
+            orientation: 'landscape',
+        });
 
-//         // Pass data to the page via props
-//         return {
-//             props: {
-//                 unsplashPhoto: {
-//                     url: photo.response?.urls?.regular,
-//                     locationName: photo.response?.location?.name,
-//                     user: {
-//                         name: photo.response?.user?.name,
-//                         link: photo.response?.user?.links?.html,
-//                     },
-//                 },
-//             },
-//         };
-//     } catch (err) {
-//         return { props: {} };
-//     }
-// };
+        // Pass data to the page via props
+        return {
+            props: {
+                unsplashPhoto: {
+                    url: photo.response?.urls?.regular,
+                    locationName: photo.response?.location?.name,
+                    user: {
+                        name: photo.response?.user?.name,
+                        link: photo.response?.user?.links?.html,
+                    },
+                },
+            },
+        };
+    } catch (err) {
+        return { props: {} };
+    }
+};
 
 export default LoginPage;
