@@ -49,6 +49,11 @@ const useUserProfileService = (): Record<string, any> => {
         // router.push('/login');
     }, [dispatch]);
 
+    const clearError = useCallback(
+        () => dispatch(actions.clearError(undefined)),
+        [dispatch],
+    );
+
     return {
         selector,
         updateCurrentUser,
@@ -56,6 +61,7 @@ const useUserProfileService = (): Record<string, any> => {
         signUp,
         login,
         logout,
+        clearError,
     };
 };
 

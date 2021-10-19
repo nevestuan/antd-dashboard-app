@@ -51,6 +51,9 @@ const slice: Slice = createSlice({
         removeCurrentUser: (state) => {
             state.data = undefined;
         },
+        clearError: (state) => {
+            state.error = undefined;
+        },
     },
     extraReducers: {
         [signUp.pending]: (state, { payload }) => {
@@ -85,7 +88,7 @@ const slice: Slice = createSlice({
     },
 });
 
-const { updateCurrentUser, removeCurrentUser } = slice.actions;
-export { updateCurrentUser, removeCurrentUser };
+const { updateCurrentUser, removeCurrentUser, clearError } = slice.actions;
+export { updateCurrentUser, removeCurrentUser, clearError };
 
 export default slice.reducer;

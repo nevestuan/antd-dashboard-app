@@ -39,7 +39,7 @@ const PageLayoutContainer: React.FC = ({ children }) => {
                             {children}
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
-                            Ant Design ©2018 Created by Ant UED
+                            Ant Dashboard ©2021 Created by Neves Tuan
                         </Footer>
                     </Layout>
                 </>

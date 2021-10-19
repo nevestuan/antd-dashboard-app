@@ -25,11 +25,16 @@ const StyledWrapper = styled(Card)`
 
 const LoginFormContainer: React.FC = () => {
     const [step, setStep] = useState('signin');
-    const { login, signUp, selector } = useUserProfileService();
+    const { login, signUp, clearError, selector } = useUserProfileService();
     const { loading, error }: any = useSelector(
         selector.getStatus,
         shallowEqual,
     );
+
+    const handleChangeStep = (stepName: string) => {
+        clearError();
+        setStep(stepName);
+    };
 
     const handleLogin = async (values: ILoginFormValues) => {
         return login(values);
@@ -51,7 +56,7 @@ const LoginFormContainer: React.FC = () => {
                     <Title level={2}>Sign in</Title>
                     <Text>
                         New User?{' '}
-                        <Link onClick={() => setStep('signup')}>
+                        <Link onClick={() => handleChangeStep('signup')}>
                             Create an account
                         </Link>
                     </Text>
@@ -69,7 +74,9 @@ const LoginFormContainer: React.FC = () => {
                     <Title level={2}>Sign up</Title>
                     <Text>
                         Already have account?{' '}
-                        <Link onClick={() => setStep('signin')}>Sign in</Link>
+                        <Link onClick={() => handleChangeStep('signin')}>
+                            Sign in
+                        </Link>
                     </Text>
                     <div className="login-form">
                         <SignupForm
